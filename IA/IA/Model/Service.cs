@@ -4,23 +4,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.Collections;
 
 namespace IA.Model
 {
     public class Service
     {
         private ArticleDAL _articleDAL;
+        private ArticleTypeDAL _articleTypeDAL;
+        private CategoryDAL _categoryDAL;
 
         private ArticleDAL ArticleDAL
         {
-            // Ett articleDAL-objekt skapas först då det behövs för första gången
             get { return _articleDAL ?? (_articleDAL = new ArticleDAL()); }
         }
 
-        /// Tar bort vald artikel ur databasen
+        private ArticleTypeDAL ArticleTypeDAL
+        {
+            get { return _articleTypeDAL ?? (_articleTypeDAL = new ArticleTypeDAL()); }
+        }
+
+        private CategoryDAL CategoryDAL
+        {
+            get { return _categoryDAL ?? (_categoryDAL = new CategoryDAL()); }
+        }
+
+
+        // Tar bort vald artikel
         public void DeleteArticle(int articleID)
         {
             ArticleDAL.DeleteArticle(articleID);
+        }
+
+        // Hämtar alla kategori
+        public IEnumerable<Categoryy> GetCategorys(bool refresh = false)
+        {
+            // Hämtar kategorier från cache
+            var categorys = HttpContext.Current.Cache["Category"] as IEnumerable<Categoryy>;
+
+            // Om det inte finns det en lista med kategorier i cache
+            if (categorys == null || refresh)
+            {
+                
+                // Hämta och sedan cacha i 10 minuter
+                categorys = CategoryDAL.GetCategorys();
+                HttpContext.Current.Cache.Insert("Category", categorys, null, DateTime.Now.AddMinutes(10), TimeSpan.Zero);
+            }
+            return categorys;
         }
 
         // Hämtar alla artikel rubriker
@@ -33,7 +63,7 @@ namespace IA.Model
         // Hämtar vald artikel
         public Article GetArticle(int articleID)
         {
-            return ArticleDAL.GetArticleByID(articleID);
+            return ArticleDAL.GetArticleByID(articleID);     
         }
 
         // Spara en artikel i databasen
@@ -43,14 +73,13 @@ namespace IA.Model
             ICollection<ValidationResult> validationResults;
             if (!article.Validate(out validationResults))
             {
-                // kastas ett undantag med ett allmänt felmeddelande samt en referens till samlingen med resultat av valideringen
                 var ex = new ValidationException("Objektet klarade inte valideringen.");
                 ex.Data.Add("ValidationResults", validationResults);
                 throw ex;
             }
 
             // Article-objektet sparas antingen genom att en ny artikel skapas eller genom att en befintlig artikel uppdateras
-            if (article.ArticleID == 0) // Ny artikel om ArticleID är 0!
+            if (article.ArticleID == 0)
             {
                 ArticleDAL.InsertArticle(article);
             }
@@ -60,6 +89,23 @@ namespace IA.Model
             }
         }
 
+        // Lägger artikeltyp
+        public void InsertArticleType(int articleID, int categoryID)
+        {
+            ArticleTypeDAL.InsertArticleType(articleID, categoryID);
+        }
+
+        // Hämtar artikeltyp
+        public List<ArticleType> GetArticleType(int articleID)
+        {
+            return ArticleTypeDAL.GetArticleTypeByID(articleID);
+        }
+
+        // Tar bort artikeltyp
+        public void DeleteArticleType(int articleTypeID)
+        {
+            ArticleTypeDAL.DeleteArticleType(articleTypeID);
+        }
 
     }
 }

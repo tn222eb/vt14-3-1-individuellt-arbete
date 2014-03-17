@@ -26,14 +26,9 @@ namespace IA.Pages.ArticlePages
             }
             catch (Exception)
             {
-                ModelState.AddModelError(String.Empty, "Ett fel inträffade då artikel rubrikerna skulle hämtas.");
+                ModelState.AddModelError(String.Empty, "Ett fel inträffade då artiklarna skulle hämtas.");
                 return null;
             }
-        }
-
-        protected void ImageCloseButton_Click(object sender, ImageClickEventArgs e)
-        {
-
         }
     }
 }

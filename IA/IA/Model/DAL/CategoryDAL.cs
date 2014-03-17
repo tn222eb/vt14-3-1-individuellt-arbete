@@ -10,7 +10,7 @@ namespace IA.Model.DAL
     public class CategoryDAL : DALBase
     {
         /// Hämtar alla kategorier
-        public IEnumerable<Category1> GetCategorys()
+        public IEnumerable<Categoryy> GetCategorys()
         {
             // Skapar ett anslutningsobjekt
             using (var conn = CreateConnection())
@@ -21,7 +21,7 @@ namespace IA.Model.DAL
                     var cmd = new SqlCommand("appSchema.uspGetCategorys", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    List<Category1> categorys = new List<Category1>(10);
+                    List<Categoryy> categorys = new List<Categoryy>(10);
 
                     // Öppnar anslutningen till databasen
                     conn.Open();
@@ -34,14 +34,13 @@ namespace IA.Model.DAL
                         while (reader.Read())
                         {
                             // Hämtar ut data
-                            categorys.Add(new Category1
+                            categorys.Add(new Categoryy
                             {
-                                CategoryID = reader.GetInt32(categoryIDIndex),
+                                CategoryID = reader.GetByte(categoryIDIndex),
                                 Category = reader.GetString(categoryIndex),
                             });
                         }
                     }
-
                     // Sätter kapaciteten till antalet element i List-objektet
                     categorys.TrimExcess();
 
@@ -49,7 +48,7 @@ namespace IA.Model.DAL
                 }
                 catch
                 {
-                    throw new ApplicationException();
+                    throw new ApplicationException("An error occured while getting categorys from the database.");
                 }
             }
         }

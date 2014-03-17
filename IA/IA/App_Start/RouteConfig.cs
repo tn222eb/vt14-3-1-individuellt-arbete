@@ -10,11 +10,11 @@ namespace IA
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-            routes.MapPageRoute("CreateArticle", "nyartikel", "~/Pages/ArticlePages/Create.aspx");
+            routes.MapPageRoute("CreateArticle", "skapa/artikel", "~/Pages/ArticlePages/Create.aspx");
             routes.MapPageRoute("Default", "", "~/Pages/ArticlePages/Listing.aspx");
-            routes.MapPageRoute("DeleteArticle", "artikel/{id}/radera", "~/Pages/ArticlePages/Delete.aspx");
-            routes.MapPageRoute("EditArticle", "artikel/{id}/redigera", "~/Pages/ArticlePages/Delete.aspx");
             routes.MapPageRoute("ArticleDetails", "artikel/{id}", "~/Pages/ArticlePages/Details.aspx");
+            routes.MapPageRoute("DeleteArticleType", "artikel/{id}/tabort/artikeltyp/{id2}", "~/Pages/ArticlePages/Delete.aspx");
+            routes.MapPageRoute("Error", "serverfel", "~/Pages/Shared/Error.aspx");
         }
     }
 }

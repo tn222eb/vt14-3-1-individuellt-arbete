@@ -6,12 +6,12 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using IA.Model;
 using System.Web.ModelBinding;
+using System.Collections;
 
 namespace IA.Pages.ArticlePages
 {
     public partial class Details : System.Web.UI.Page
     {
-
         private Service _service;
 
         private Service Service
@@ -24,8 +24,10 @@ namespace IA.Pages.ArticlePages
             // Om det finns något meddelande i extension-metoden så hämtas det
             MessageLiteral.Text = Page.GetTempData("Message") as string;
             MessagePanel.Visible = !String.IsNullOrWhiteSpace(MessageLiteral.Text);
+
         }
 
+        // Hämtar artikel
         public Article ArticleListView_GetData([RouteData] int id)
         {
             try
@@ -64,8 +66,7 @@ namespace IA.Pages.ArticlePages
                 var article = Service.GetArticle(id);
                 if (article == null)
                 {
-                    ModelState.AddModelError(String.Empty,
-                    String.Format("Artikeln hittades inte."));
+                    ModelState.AddModelError(String.Empty, "Artikeln hittades inte.");
                     return;
                 }
 
@@ -81,6 +82,38 @@ namespace IA.Pages.ArticlePages
             catch (Exception)
             {
                 ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då artikeln skulle uppdateras.");
+            }
+        }
+
+        // Hämtar artikeltyp
+        public IEnumerable<ArticleType> ArticleTypeListView_GetData([RouteData] int id)
+        {
+            try
+            {
+                return Service.GetArticleType(id);
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError(String.Empty, "Fel inträffade då artikeltyp skulle hämtas.");
+                return null;
+            }
+        }
+
+        // Hämtar ut kategori till artikeln
+        protected void ArticleTypeListView_ItemDataBound(object sender, ListViewItemEventArgs e)
+        {
+            var label = e.Item.FindControl("CategoryLabel") as Label;
+            if (label != null)
+            {
+                // Typ omvandlar så att man kan använda nyckel
+                var articleType = (ArticleType)e.Item.DataItem;
+
+                // Hämtar sedan kategorierna och väljer ut den som har samma ID
+                var category = Service.GetCategorys()
+                    .Single(c => c.CategoryID == articleType.CategoryID);
+                
+                // Skriver ut kategorin
+                label.Text = String.Format(label.Text, category.Category);
             }
         }
     }

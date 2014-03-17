@@ -20,7 +20,7 @@
         <div class="content-wrapper">
             <div class="float-left">
                 <p class="site-title">
-                    <a runat="server" href="~/">TOMMYBLADET.SE</a>
+                    <a runat="server" href="~/">Tommybladet.se</a>
                 </p>
             </div>
             </div>
@@ -59,10 +59,11 @@
     <footer>
         <div class="content-wrapper">
             <div class="float-left">
-                <p>&copy; <%: DateTime.Now.Year %> - TOMMYBLADET.SE </p>
+                <p>&copy; Sidan skapad av Tommy Nguyen</p>
             </div>
         </div>
     </footer>
     </form>
+    <asp:ContentPlaceHolder ID="ScriptContentPlaceHolder" runat="server" />
 </body>
 </html>

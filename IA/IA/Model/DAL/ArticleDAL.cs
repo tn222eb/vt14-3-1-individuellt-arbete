@@ -69,7 +69,7 @@ namespace IA.Model.DAL
                     // Lägger till den parameter den lagrade proceduren kräver
                     cmd.Parameters.AddWithValue("@ArticleID", articleID);
 
-                    // Öppnar anslutningen till databasen.
+                    // Öppnar anslutningen till databasen
                     conn.Open();
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -101,7 +101,7 @@ namespace IA.Model.DAL
             }
         }
 
-        /// Skapar en ny artikel
+        // Skapar en ny artikel
         public void InsertArticle(Article article)
         {
             // Skapar och initierar ett anslutningsobjekt

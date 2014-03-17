@@ -19,6 +19,7 @@ a {
     padding-left: 3px;
     padding-right: 3px;
     text-decoration: underline;
+    word-wrap: break-word;
 }
 
     a:link, a:visited,
@@ -59,6 +60,7 @@ mark {
 
 #date {
     float: right;
+    font-style: italic;
 }
 
 h1, h2, h3,
@@ -71,6 +73,7 @@ h4, h5, h6 {
 h1 {
     font-size: 2em;
     margin-bottom: 8px;
+    word-wrap: break-word;
 }
 
 h2 {
@@ -761,4 +764,38 @@ tr.pager td {
     float: right;
     background: #EEF4D3;
     border: none;
+}
+
+    .closebutton:hover {
+        border: none;
+    }
+
+#Articletype-field {
+    float: right;
+}
+
+.italic-text {
+    font-weight: bold;
+}
+
+#articletype-saknas {
+    float: right;
+}
+
+.button-style {
+    text-decoration: none;
+    border-radius: 3px;
+    font-weight: bold;
+    border: 1.5px solid black;
+    padding: 5px 9px;
+    margin-right: 10px;
+    box-shadow: 4px 3px #888
+}
+
+#button-div {
+    margin-top: 12px;
+}
+
+.grot {
+    text-decoration: none;
 }
