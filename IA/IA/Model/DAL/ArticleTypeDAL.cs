@@ -22,8 +22,8 @@ namespace IA.Model.DAL
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     // Lägger till de parametrar den lagrade proceduren kräver
-                    cmd.Parameters.Add("@ArticleID", SqlDbType.VarChar, 255).Value = articleID;
-                    cmd.Parameters.Add("@CategoryID", SqlDbType.VarChar, 8000).Value = categoryID;
+                    cmd.Parameters.Add("@ArticleID", SqlDbType.Int, 4).Value = articleID;
+                    cmd.Parameters.Add("@CategoryID", SqlDbType.Int, 4).Value = categoryID;
 
                     // Öppnar anslutningen till databasen
                     conn.Open();
