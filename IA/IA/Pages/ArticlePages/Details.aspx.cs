@@ -58,33 +58,6 @@ namespace IA.Pages.ArticlePages
             }
         }
 
-        // Uppdaterar artikeln
-        public void ArticleListView_UpdateItem([RouteData] int id)
-        {
-            try
-            {
-                var article = Service.GetArticle(id);
-                if (article == null)
-                {
-                    ModelState.AddModelError(String.Empty, "Artikeln hittades inte.");
-                    return;
-                }
-
-                if (TryUpdateModel(article))
-                {
-                    Service.SaveArticle(article);
-                    // Lägger till ett meddelande i extension-metoden
-                    Page.SetTempData("Message", "Artikeln har uppdaterats.");
-                    Response.RedirectToRoute("ArticleDetails", new { id = article.ArticleID });
-                    Context.ApplicationInstance.CompleteRequest();
-                }
-            }
-            catch (Exception)
-            {
-                ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då artikeln skulle uppdateras.");
-            }
-        }
-
         // Hämtar artikeltyp
         public IEnumerable<ArticleType> ArticleTypeListView_GetData([RouteData] int id)
         {

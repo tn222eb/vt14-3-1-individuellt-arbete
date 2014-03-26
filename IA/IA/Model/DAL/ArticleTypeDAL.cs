@@ -86,7 +86,7 @@ namespace IA.Model.DAL
             }
         }
 
-        public void DeleteArticleType(int articleTypeID)
+        public void DeleteArticleTypes(int articleID)
         {
             // Skapar och initierar ett anslutningsobjekt
             using (SqlConnection conn = CreateConnection())
@@ -94,11 +94,11 @@ namespace IA.Model.DAL
                 try
                 {
                     // Skapar och initierar ett SqlCommand-objekt som används till att exekvera specifierad lagrad procedur
-                    SqlCommand cmd = new SqlCommand("appSchema.uspDeleteArticleType", conn);
+                    SqlCommand cmd = new SqlCommand("appSchema.uspDeleteArticleTypes", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     // Lägger till den parameter den lagrade proceduren kräver
-                    cmd.Parameters.Add("@ArticleTypeID", SqlDbType.Int, 4).Value = articleTypeID;
+                    cmd.Parameters.Add("@ArticleID", SqlDbType.Int, 4).Value = articleID;
 
                     // Öppnar anslutningen till databasen
                     conn.Open();

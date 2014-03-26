@@ -95,16 +95,16 @@ namespace IA.Model
             ArticleTypeDAL.InsertArticleType(articleID, categoryID);
         }
 
-        // Hämtar artikeltyp
+        // Hämtar artikeltyper
         public List<ArticleType> GetArticleType(int articleID)
         {
             return ArticleTypeDAL.GetArticleTypeByID(articleID);
         }
 
-        // Tar bort artikeltyp
-        public void DeleteArticleType(int articleTypeID)
+        // Rensar artikeltyper
+        public void DeleteArticleTypes(int articleID)
         {
-            ArticleTypeDAL.DeleteArticleType(articleTypeID);
+            ArticleTypeDAL.DeleteArticleTypes(articleID);
         }
 
     }

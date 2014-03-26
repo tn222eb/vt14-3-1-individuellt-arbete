@@ -199,8 +199,8 @@
     <Content Include="packages.config" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Pages\ArticlePages\Create.aspx" />
-    <Content Include="Pages\ArticlePages\Delete.aspx" />
     <Content Include="Pages\ArticlePages\Details.aspx" />
+    <Content Include="Pages\ArticlePages\Edit.aspx" />
     <Content Include="Pages\ArticlePages\Listing.aspx" />
     <Content Include="Pages\Shared\Error.aspx" />
     <Content Include="Scripts\jquery-1.7.1.js" />
@@ -305,19 +305,19 @@
     <Compile Include="Pages\ArticlePages\Create.aspx.designer.cs">
       <DependentUpon>Create.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ArticlePages\Delete.aspx.cs">
-      <DependentUpon>Delete.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\ArticlePages\Delete.aspx.designer.cs">
-      <DependentUpon>Delete.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\ArticlePages\Details.aspx.cs">
       <DependentUpon>Details.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\ArticlePages\Details.aspx.designer.cs">
       <DependentUpon>Details.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ArticlePages\Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ArticlePages\Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\ArticlePages\Listing.aspx.cs">
       <DependentUpon>Listing.aspx</DependentUpon>

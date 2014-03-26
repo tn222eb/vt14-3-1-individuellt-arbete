@@ -54,15 +54,15 @@ namespace IA
                 ViewState[AntiXsrfTokenKey] = Page.ViewStateUserKey;
                 ViewState[AntiXsrfUserNameKey] = Context.User.Identity.Name ?? String.Empty;
             }
-            else
-            {
-                // Validate the Anti-XSRF token
-                if ((string)ViewState[AntiXsrfTokenKey] != _antiXsrfTokenValue
-                    || (string)ViewState[AntiXsrfUserNameKey] != (Context.User.Identity.Name ?? String.Empty))
-                {
-                    throw new InvalidOperationException("Validation of Anti-XSRF token failed.");
-                }
-            }
+            //else
+            //{
+            //    // Validate the Anti-XSRF token
+            //    if ((string)ViewState[AntiXsrfTokenKey] != _antiXsrfTokenValue
+            //        || (string)ViewState[AntiXsrfUserNameKey] != (Context.User.Identity.Name ?? String.Empty))
+            //    {
+            //        throw new InvalidOperationException("Validation of Anti-XSRF token failed.");
+            //    }
+            //}
         }
 
         protected void Page_Load(object sender, EventArgs e)
